@@ -1,0 +1,15 @@
+title Machine to platform authentication
+
+actor Client
+participant Frontend
+participant Shield
+participant ServicePlaneApp
+
+Client->Frontend: request with Authorization: Bearer <key>
+Frontend-->Shield: exchange api key with id token
+Frontend<--Shield: id token if api key valid
+
+Frontend-->ServicePlaneApp: request resource with Authorization: Bearer <id token>
+Frontend<--ServicePlaneApp: resource
+Client<--Frontend: resource
+

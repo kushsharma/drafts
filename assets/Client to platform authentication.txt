@@ -1,0 +1,28 @@
+title Client to platform authentication
+
+actor Client
+participant Frontend
+participant Frontend(session)
+participant Shield
+participant ServicePlaneApp
+
+Client->Frontend: access/id tokens after social(google) login redirect
+Frontend-->Shield: received OAuth2 tokens
+Frontend<--Shield: shield creates user & generate jwt
+
+Frontend-->Frontend(session): save jwt
+Frontend<--Frontend(session): unique session id
+Client<--Frontend: include session id in client request cookies
+
+Client-->Frontend: request resource with session id in cookies
+Frontend-->Frontend(session): get jwt via session id
+Frontend<--Frontend(session): user jwt
+Frontend(session)-xClient: if not found, fail
+
+Frontend-->ServicePlaneApp: request with Authorization: Bearer <jwt>
+Shield<--ServicePlaneApp: request public key used to sign jwt
+Shield-->ServicePlaneApp: get jwt public key & verify jwt
+Frontend<--ServicePlaneApp: valid jwt, return resource
+ServicePlaneApp-xClient: if not valid, fail
+Client<--Frontend: resource
+
