@@ -1,7 +1,12 @@
-# Bad writings
+## Drafts
+
+Discourse related to stuff.
 
 ### Tools
 
-- For sequence diagrams: https://sequencediagram.org/
-- For design: https://excalidraw.com/
-- For markdown: https://joplinapp.org/
+- Diagrams & Design
+    - https://sequencediagram.org/
+    - https://excalidraw.com/
+- For markdown
+    - https://joplinapp.org/ 
+    - https://notion.so
